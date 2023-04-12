@@ -30,7 +30,7 @@
         <asp:Label ID="Label15" runat="server" Text="Jr. Developer" Width="150px"></asp:Label>
         <br />
         <asp:Label ID="Label16" runat="server" Text="Tecrübeler" Width="150px"></asp:Label>
-        <asp:Label ID="Label17" runat="server" Text="SDÜ - Bilgi İşlem / Amazon Otomasyon" Width="150px"></asp:Label>
+        <asp:Label ID="Label17" runat="server" Text="SDÜ - Bilgi İşlem / Amazon Otomasyon" Width="345px"></asp:Label>
         <br />
         <asp:Label ID="Label18" runat="server" Text="Diller" Width="150px"></asp:Label>
         <asp:Label ID="Label19" runat="server" Text="Python - C# - Dart" Width="150px"></asp:Label>
