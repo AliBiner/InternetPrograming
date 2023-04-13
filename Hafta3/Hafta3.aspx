@@ -22,7 +22,7 @@
                     <td class="auto-style2">Adı</td>
                     <td style="width:10px;">&nbsp;</td>
                     <td style="width:400px;">
-                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>

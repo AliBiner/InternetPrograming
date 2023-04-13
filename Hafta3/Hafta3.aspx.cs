@@ -18,5 +18,10 @@ namespace Hafta3
         {
             lblMessage.Text = TextBox1.Text;
         }
+
+        protected void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
