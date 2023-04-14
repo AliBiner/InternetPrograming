@@ -19,9 +19,6 @@ namespace _2215010013___Ödev_4
                 Table2.Visible = false;
             }
         }
-        
-        
-        
         protected void btnSend_Click(object sender, EventArgs e)
         {
             Table1.Visible = false;
@@ -35,16 +32,12 @@ namespace _2215010013___Ödev_4
             Label7.Text = RadioButtonList1.SelectedItem.Text;
             Label8.Text = txtExperience.Text;
             Label9.Text = "";
-            string selectedItems = String.Join(",",
+            string selectedItems = String.Join("/",
              CheckBoxList1.Items.OfType<ListItem>().Where(r => r.Selected)
             .Select(r => r.Text));
             Label9.Text = selectedItems;
-            Label10.Text = lstEducation.SelectedItem.Text;
-            
-            
-            
+            Label10.Text = lstEducation.SelectedItem.Text;    
         }
-
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Table1.Visible = true;
