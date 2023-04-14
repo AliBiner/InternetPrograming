@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AddressModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ilceler">
+          <Key>
+            <PropertyRef Name="ilceId" />
+          </Key>
+          <Property Name="ilceId" Type="int" Nullable="false" />
+          <Property Name="SehirId" Type="int" Nullable="false" />
+          <Property Name="IlceAdi" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="SehirAdi" Type="nvarchar" MaxLength="55" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sehirler">
+          <Key>
+            <PropertyRef Name="SehirId" />
+          </Key>
+          <Property Name="SehirId" Type="int" Nullable="false" />
+          <Property Name="SehirAdi" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PlakaNo" Type="tinyint" Nullable="false" />
+          <Property Name="TelefonKodu" Type="int" Nullable="false" />
+          <Property Name="RowNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SemtMah">
+          <Key>
+            <PropertyRef Name="SemtMahId" />
+          </Key>
+          <Property Name="SemtMahId" Type="int" Nullable="false" />
+          <Property Name="SemtAdi" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="MahalleAdi" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PostaKodu" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="ilceId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Ilceler_Sehirler">
+          <End Role="Sehirler" Type="Self.Sehirler" Multiplicity="1" />
+          <End Role="Ilceler" Type="Self.Ilceler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehirler">
+              <PropertyRef Name="SehirId" />
+            </Principal>
+            <Dependent Role="Ilceler">
+              <PropertyRef Name="SehirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SemtMah_Ilceler">
+          <End Role="Ilceler" Type="Self.Ilceler" Multiplicity="1" />
+          <End Role="SemtMah" Type="Self.SemtMah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilceler">
+              <PropertyRef Name="ilceId" />
+            </Principal>
+            <Dependent Role="SemtMah">
+              <PropertyRef Name="ilceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AddressModelStoreContainer">
+          <EntitySet Name="Ilceler" EntityType="Self.Ilceler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sehirler" EntityType="Self.Sehirler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SemtMah" EntityType="Self.SemtMah" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Ilceler_Sehirler" Association="Self.FK_Ilceler_Sehirler">
+            <End Role="Sehirler" EntitySet="Sehirler" />
+            <End Role="Ilceler" EntitySet="Ilceler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SemtMah_Ilceler" Association="Self.FK_SemtMah_Ilceler">
+            <End Role="Ilceler" EntitySet="Ilceler" />
+            <End Role="SemtMah" EntitySet="SemtMah" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AddressModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ilceler">
+          <Key>
+            <PropertyRef Name="ilceId" />
+          </Key>
+          <Property Name="ilceId" Type="Int32" Nullable="false" />
+          <Property Name="SehirId" Type="Int32" Nullable="false" />
+          <Property Name="IlceAdi" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SehirAdi" Type="String" MaxLength="55" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sehirler" Relationship="Self.FK_Ilceler_Sehirler" FromRole="Ilceler" ToRole="Sehirler" />
+          <NavigationProperty Name="SemtMahs" Relationship="Self.FK_SemtMah_Ilceler" FromRole="Ilceler" ToRole="SemtMah" />
+        </EntityType>
+        <EntityType Name="Sehirler">
+          <Key>
+            <PropertyRef Name="SehirId" />
+          </Key>
+          <Property Name="SehirId" Type="Int32" Nullable="false" />
+          <Property Name="SehirAdi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PlakaNo" Type="Byte" Nullable="false" />
+          <Property Name="TelefonKodu" Type="Int32" Nullable="false" />
+          <Property Name="RowNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ilcelers" Relationship="Self.FK_Ilceler_Sehirler" FromRole="Sehirler" ToRole="Ilceler" />
+        </EntityType>
+        <EntityType Name="SemtMah">
+          <Key>
+            <PropertyRef Name="SemtMahId" />
+          </Key>
+          <Property Name="SemtMahId" Type="Int32" Nullable="false" />
+          <Property Name="SemtAdi" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MahalleAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostaKodu" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ilceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ilceler" Relationship="Self.FK_SemtMah_Ilceler" FromRole="SemtMah" ToRole="Ilceler" />
+        </EntityType>
+        <Association Name="FK_Ilceler_Sehirler">
+          <End Role="Sehirler" Type="Self.Sehirler" Multiplicity="1" />
+          <End Role="Ilceler" Type="Self.Ilceler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehirler">
+              <PropertyRef Name="SehirId" />
+            </Principal>
+            <Dependent Role="Ilceler">
+              <PropertyRef Name="SehirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SemtMah_Ilceler">
+          <End Role="Ilceler" Type="Self.Ilceler" Multiplicity="1" />
+          <End Role="SemtMah" Type="Self.SemtMah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilceler">
+              <PropertyRef Name="ilceId" />
+            </Principal>
+            <Dependent Role="SemtMah">
+              <PropertyRef Name="ilceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AddressEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ilcelers" EntityType="Self.Ilceler" />
+          <EntitySet Name="Sehirlers" EntityType="Self.Sehirler" />
+          <EntitySet Name="SemtMahs" EntityType="Self.SemtMah" />
+          <AssociationSet Name="FK_Ilceler_Sehirler" Association="Self.FK_Ilceler_Sehirler">
+            <End Role="Sehirler" EntitySet="Sehirlers" />
+            <End Role="Ilceler" EntitySet="Ilcelers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SemtMah_Ilceler" Association="Self.FK_SemtMah_Ilceler">
+            <End Role="Ilceler" EntitySet="Ilcelers" />
+            <End Role="SemtMah" EntitySet="SemtMahs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AddressModelStoreContainer" CdmEntityContainer="AddressEntities">
+          <EntitySetMapping Name="Ilcelers">
+            <EntityTypeMapping TypeName="AddressModel.Ilceler">
+              <MappingFragment StoreEntitySet="Ilceler">
+                <ScalarProperty Name="ilceId" ColumnName="ilceId" />
+                <ScalarProperty Name="SehirId" ColumnName="SehirId" />
+                <ScalarProperty Name="IlceAdi" ColumnName="IlceAdi" />
+                <ScalarProperty Name="SehirAdi" ColumnName="SehirAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sehirlers">
+            <EntityTypeMapping TypeName="AddressModel.Sehirler">
+              <MappingFragment StoreEntitySet="Sehirler">
+                <ScalarProperty Name="SehirId" ColumnName="SehirId" />
+                <ScalarProperty Name="SehirAdi" ColumnName="SehirAdi" />
+                <ScalarProperty Name="PlakaNo" ColumnName="PlakaNo" />
+                <ScalarProperty Name="TelefonKodu" ColumnName="TelefonKodu" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SemtMahs">
+            <EntityTypeMapping TypeName="AddressModel.SemtMah">
+              <MappingFragment StoreEntitySet="SemtMah">
+                <ScalarProperty Name="SemtMahId" ColumnName="SemtMahId" />
+                <ScalarProperty Name="SemtAdi" ColumnName="SemtAdi" />
+                <ScalarProperty Name="MahalleAdi" ColumnName="MahalleAdi" />
+                <ScalarProperty Name="PostaKodu" ColumnName="PostaKodu" />
+                <ScalarProperty Name="ilceId" ColumnName="ilceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
