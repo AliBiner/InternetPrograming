@@ -14,14 +14,6 @@ namespace Hafta4
 
         }
 
-        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownList2.SelectedIndex.
-        }
-
-        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownList2.;
-        }
+       
     }
 }
