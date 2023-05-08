@@ -10,13 +10,13 @@ namespace Hafta7
 {
     public partial class SecondPage : System.Web.UI.Page
     {
-        
         Class1 cs = new Class1();
-        
         public void Page_Load(object sender, EventArgs e)
         {
             int gelen = int.Parse(Request.QueryString["ID"]);
             var bilgi = cs.BilgiGetir(gelen);
+            var bilgi2 = cs.KullaniciListele();
+
             Label1.Text = bilgi.U_name;
             Label2.Text = bilgi.U_surName;
             Label3.Text = bilgi.U_dateofBirth;
@@ -27,12 +27,13 @@ namespace Hafta7
             Label10.Text = bilgi.U_experience;
             Label11.Text = bilgi.U_language;
             Label12.Text = bilgi.U_Education;
-            
 
-            
+            GridView1.DataBind();
         }
 
-       
-         
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

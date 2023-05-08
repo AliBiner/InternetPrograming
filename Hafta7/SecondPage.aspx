@@ -90,6 +90,21 @@
             </td>
         </tr>
         </table>
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            <Columns>
+                <asp:BoundField DataField="U_name" HeaderText="Ad" SortExpression="U_name" />
+                <asp:BoundField DataField="U_surName" HeaderText="Soyad" SortExpression="U_surName" />
+                <asp:BoundField DataField="U_address" HeaderText="Adres" SortExpression="U_address" />
+                <asp:BoundField DataField="U_phone" HeaderText="Telefon" SortExpression="U_phone" />
+                <asp:BoundField DataField="U_email" HeaderText="Email" SortExpression="U_email" />
+                <asp:BoundField DataField="U_degree" HeaderText="Seviye" SortExpression="U_degree" />
+                <asp:BoundField DataField="U_experience" HeaderText="Tecrübeler" SortExpression="U_experience" />
+                <asp:BoundField DataField="U_language" HeaderText="Diller" SortExpression="U_language" />
+                <asp:BoundField DataField="U_Education" HeaderText="Eğitim" SortExpression="U_Education" />
+                <asp:BoundField DataField="U_dateofBirth" HeaderText="Doğum Tarihi" SortExpression="U_dateofBirth" />
+            </Columns>
+        </asp:GridView>
+        <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="KullaniciListele" TypeName="Hafta7.Class1"></asp:ObjectDataSource>
     </form>
     </body>
 </html>

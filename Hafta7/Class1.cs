@@ -36,7 +36,7 @@ namespace Hafta7
         
         public int GirisYap(User2 a) {
 
-            var user = entities.User2.Where(x=>x.U_email==a.U_email && x.U_password==a.U_password).First();
+            var user = entities.User2.Where(x=>x.U_email==a.U_email && x.U_password==a.U_password).FirstOrDefault();
 
             if (user != null)
             {
@@ -56,6 +56,9 @@ namespace Hafta7
             return a;
         }
 
-        
+        public List<User2> KullaniciListele()
+        {
+            return entities.User2.ToList();
+        }
     }
 }
